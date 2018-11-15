@@ -6,7 +6,13 @@
 package servlet;
 
 
-import controller.AccountJpaController;
+
+
+
+
+
+import Model.Jpa.Account;
+import Model.Jpa.Controller.AccountJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.annotation.Resource;
@@ -17,7 +23,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
-import model.Account;
+
+
+
+
 
 /**
  *
@@ -44,7 +53,7 @@ public class LogInSevlet extends HttpServlet {
         String password = request.getParameter("password");
         if(username!=null&&password!=null){
             AccountJpaController acCtrl = new AccountJpaController(utx, emf);
-            Account ac = acCtrl.findAccount(String.valueOf(username));
+            Account ac = acCtrl.findAccount(String.valueOf("username"));
             if(ac!=null){
                 if(Integer.valueOf(password).equals(ac.getTelno())){
                     request.getSession().setAttribute("ac", ac);
@@ -55,7 +64,7 @@ public class LogInSevlet extends HttpServlet {
         }
         getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
     }
-    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
