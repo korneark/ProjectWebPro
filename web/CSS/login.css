@@ -15,7 +15,7 @@ $button-background-color: #27AE60;
 }
 
 html { 
-  background: url(https://dl.dropboxusercontent.com/u/159328383/background.jpg) no-repeat center center fixed; 
+  background: url("../Pic/login.jpg") no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -23,7 +23,7 @@ html {
 }
 
 body {
-  background: transparent;
+  background-image:  transparent;
 }
 
 body, input, button {
@@ -96,7 +96,7 @@ body, input, button {
       }
     }
 
-    button {
+/*    button {
       margin-top: 20px;
       background: $button-background-color;
       border: none;
@@ -112,7 +112,7 @@ body, input, button {
         background: tint($button-background-color, 4%);
         -webkit-animation: hop 1s;
         animation: hop 1s;
-      }
+      }*/
     }
   }
 }
