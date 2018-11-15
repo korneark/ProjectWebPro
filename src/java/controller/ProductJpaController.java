@@ -3,32 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.Jpa.Controller;
+package controller;
 
-import Model.Jpa.Account;
-import Model.Jpa.Controller.exceptions.IllegalOrphanException;
-import Model.Jpa.Controller.exceptions.NonexistentEntityException;
-import Model.Jpa.Controller.exceptions.PreexistingEntityException;
-import Model.Jpa.Controller.exceptions.RollbackFailureException;
+import controller.exceptions.IllegalOrphanException;
+import controller.exceptions.NonexistentEntityException;
+import controller.exceptions.PreexistingEntityException;
+import controller.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Model.Jpa.History;
+import model.History;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
+import model.Product;
 
 /**
  *
- * @author elesi
+ * @author Windows 10
  */
-public class AccountJpaController implements Serializable {
+public class ProductJpaController implements Serializable {
 
-    public AccountJpaController(UserTransaction utx, EntityManagerFactory emf) {
+    public ProductJpaController(UserTransaction utx, EntityManagerFactory emf) {
         this.utx = utx;
         this.emf = emf;
     }
@@ -39,28 +39,28 @@ public class AccountJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Account account) throws PreexistingEntityException, RollbackFailureException, Exception {
-        if (account.getHistoryList() == null) {
-            account.setHistoryList(new ArrayList<History>());
+    public void create(Product product) throws PreexistingEntityException, RollbackFailureException, Exception {
+        if (product.getHistoryList() == null) {
+            product.setHistoryList(new ArrayList<History>());
         }
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
             List<History> attachedHistoryList = new ArrayList<History>();
-            for (History historyListHistoryToAttach : account.getHistoryList()) {
+            for (History historyListHistoryToAttach : product.getHistoryList()) {
                 historyListHistoryToAttach = em.getReference(historyListHistoryToAttach.getClass(), historyListHistoryToAttach.getHistoryid());
                 attachedHistoryList.add(historyListHistoryToAttach);
             }
-            account.setHistoryList(attachedHistoryList);
-            em.persist(account);
-            for (History historyListHistory : account.getHistoryList()) {
-                Account oldUsernameOfHistoryListHistory = historyListHistory.getUsername();
-                historyListHistory.setUsername(account);
+            product.setHistoryList(attachedHistoryList);
+            em.persist(product);
+            for (History historyListHistory : product.getHistoryList()) {
+                Product oldProductidOfHistoryListHistory = historyListHistory.getProductid();
+                historyListHistory.setProductid(product);
                 historyListHistory = em.merge(historyListHistory);
-                if (oldUsernameOfHistoryListHistory != null) {
-                    oldUsernameOfHistoryListHistory.getHistoryList().remove(historyListHistory);
-                    oldUsernameOfHistoryListHistory = em.merge(oldUsernameOfHistoryListHistory);
+                if (oldProductidOfHistoryListHistory != null) {
+                    oldProductidOfHistoryListHistory.getHistoryList().remove(historyListHistory);
+                    oldProductidOfHistoryListHistory = em.merge(oldProductidOfHistoryListHistory);
                 }
             }
             utx.commit();
@@ -70,8 +70,8 @@ public class AccountJpaController implements Serializable {
             } catch (Exception re) {
                 throw new RollbackFailureException("An error occurred attempting to roll back the transaction.", re);
             }
-            if (findAccount(account.getUsername()) != null) {
-                throw new PreexistingEntityException("Account " + account + " already exists.", ex);
+            if (findProduct(product.getProductid()) != null) {
+                throw new PreexistingEntityException("Product " + product + " already exists.", ex);
             }
             throw ex;
         } finally {
@@ -81,21 +81,21 @@ public class AccountJpaController implements Serializable {
         }
     }
 
-    public void edit(Account account) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+    public void edit(Product product) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            Account persistentAccount = em.find(Account.class, account.getUsername());
-            List<History> historyListOld = persistentAccount.getHistoryList();
-            List<History> historyListNew = account.getHistoryList();
+            Product persistentProduct = em.find(Product.class, product.getProductid());
+            List<History> historyListOld = persistentProduct.getHistoryList();
+            List<History> historyListNew = product.getHistoryList();
             List<String> illegalOrphanMessages = null;
             for (History historyListOldHistory : historyListOld) {
                 if (!historyListNew.contains(historyListOldHistory)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain History " + historyListOldHistory + " since its username field is not nullable.");
+                    illegalOrphanMessages.add("You must retain History " + historyListOldHistory + " since its productid field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -107,16 +107,16 @@ public class AccountJpaController implements Serializable {
                 attachedHistoryListNew.add(historyListNewHistoryToAttach);
             }
             historyListNew = attachedHistoryListNew;
-            account.setHistoryList(historyListNew);
-            account = em.merge(account);
+            product.setHistoryList(historyListNew);
+            product = em.merge(product);
             for (History historyListNewHistory : historyListNew) {
                 if (!historyListOld.contains(historyListNewHistory)) {
-                    Account oldUsernameOfHistoryListNewHistory = historyListNewHistory.getUsername();
-                    historyListNewHistory.setUsername(account);
+                    Product oldProductidOfHistoryListNewHistory = historyListNewHistory.getProductid();
+                    historyListNewHistory.setProductid(product);
                     historyListNewHistory = em.merge(historyListNewHistory);
-                    if (oldUsernameOfHistoryListNewHistory != null && !oldUsernameOfHistoryListNewHistory.equals(account)) {
-                        oldUsernameOfHistoryListNewHistory.getHistoryList().remove(historyListNewHistory);
-                        oldUsernameOfHistoryListNewHistory = em.merge(oldUsernameOfHistoryListNewHistory);
+                    if (oldProductidOfHistoryListNewHistory != null && !oldProductidOfHistoryListNewHistory.equals(product)) {
+                        oldProductidOfHistoryListNewHistory.getHistoryList().remove(historyListNewHistory);
+                        oldProductidOfHistoryListNewHistory = em.merge(oldProductidOfHistoryListNewHistory);
                     }
                 }
             }
@@ -129,9 +129,9 @@ public class AccountJpaController implements Serializable {
             }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = account.getUsername();
-                if (findAccount(id) == null) {
-                    throw new NonexistentEntityException("The account with id " + id + " no longer exists.");
+                Integer id = product.getProductid();
+                if (findProduct(id) == null) {
+                    throw new NonexistentEntityException("The product with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -142,30 +142,30 @@ public class AccountJpaController implements Serializable {
         }
     }
 
-    public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
             em = getEntityManager();
-            Account account;
+            Product product;
             try {
-                account = em.getReference(Account.class, id);
-                account.getUsername();
+                product = em.getReference(Product.class, id);
+                product.getProductid();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The account with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The product with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            List<History> historyListOrphanCheck = account.getHistoryList();
+            List<History> historyListOrphanCheck = product.getHistoryList();
             for (History historyListOrphanCheckHistory : historyListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Account (" + account + ") cannot be destroyed since the History " + historyListOrphanCheckHistory + " in its historyList field has a non-nullable username field.");
+                illegalOrphanMessages.add("This Product (" + product + ") cannot be destroyed since the History " + historyListOrphanCheckHistory + " in its historyList field has a non-nullable productid field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            em.remove(account);
+            em.remove(product);
             utx.commit();
         } catch (Exception ex) {
             try {
@@ -181,19 +181,19 @@ public class AccountJpaController implements Serializable {
         }
     }
 
-    public List<Account> findAccountEntities() {
-        return findAccountEntities(true, -1, -1);
+    public List<Product> findProductEntities() {
+        return findProductEntities(true, -1, -1);
     }
 
-    public List<Account> findAccountEntities(int maxResults, int firstResult) {
-        return findAccountEntities(false, maxResults, firstResult);
+    public List<Product> findProductEntities(int maxResults, int firstResult) {
+        return findProductEntities(false, maxResults, firstResult);
     }
 
-    private List<Account> findAccountEntities(boolean all, int maxResults, int firstResult) {
+    private List<Product> findProductEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Account.class));
+            cq.select(cq.from(Product.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -205,20 +205,20 @@ public class AccountJpaController implements Serializable {
         }
     }
 
-    public Account findAccount(String id) {
+    public Product findProduct(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Account.class, id);
+            return em.find(Product.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getAccountCount() {
+    public int getProductCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Account> rt = cq.from(Account.class);
+            Root<Product> rt = cq.from(Product.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

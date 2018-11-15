@@ -11,8 +11,8 @@ package servlet;
 
 
 
-import Model.Jpa.Account;
-import Model.Jpa.Controller.AccountJpaController;
+
+import controller.AccountJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.annotation.Resource;
@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
+import model.Account;
 
 
 

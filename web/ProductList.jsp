@@ -19,7 +19,7 @@
     </head>
     <body>
         <div class="table">
-                    <jsp:include page="include/Header.jsp?title=Shopping List ::"/>
+              
 <!--        <table class="table">
             <tr>
                 <td><h1>ProductList::</h1><hr></td>
