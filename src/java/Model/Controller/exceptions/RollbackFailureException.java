@@ -1,4 +1,4 @@
-package controller.exceptions;
+package Model.Controller.exceptions;
 
 public class RollbackFailureException extends Exception {
     public RollbackFailureException(String message, Throwable cause) {

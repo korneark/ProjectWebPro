@@ -19,54 +19,24 @@
     </head>
     <body>
         <div class="table">
-              
-<!--        <table class="table">
-            <tr>
-                <td><h1>ProductList::</h1><hr></td>
-                <td>
-                    <a href="ShowCart"> Your cart:(${cart.totalQuantity})</a>                   
-                </td>
-                <td>
-                    <a href="RemoveItemFormCart?productCode=${p.productCode}">
-                        <input type="button" value="Remove All"></a></td>
-            </tr>
-        </table>-->
+            
         <table id="example" class="table">
             <thead>
             <th>Image</th>
             <th>No</th>
-            <th>Product Code</th>
-            <th>Product Name</th>
-            <th>Product Quantity</th>
-            <th>Product Type</th>
-            <th>Price</th>
-            <th>Detail</th>
-            <th>Add To Cart</th>
-            <th>Remove Form Cart</th>
+            <th>Product Id</th>
+            <th>Product Name</th>            
         </thead>
         <c:forEach items="${product}" var="p" varStatus="vs">
             <tr>
                 <td><img src="Pic/${p.productid}.jpg" width="120"></td>
                 <td>${vs.count}</td>
-                <td><a href="GetProduct?productCode=${p.productid}">${p.productid}</a></td>
-                <td>${p.productname}</td>
-                <td>${p.productquantity}</td>
-                <td>${p.producttype}</td>
-                <td>${p.productprice}</td>
-                <td>${p.productdetail}</td>
-                <td><a href="AddItemToCart?productCode=${p.productid}">
-                        <input type="button" value="Add To Cart"></a></td>
-                <td>
-                    <a href="RemoveItemFormCart?productCode=${p.productid}">
-                        <input type="button" value="Remove"></a></td>        
+                <td><a href="GetProduct?productId=${p.productid}">${p.productid}</a></td>
+                <td>${p.productname}</td>                       
             </tr>
         </c:forEach>
     </table>
         </div>
-    <script>
-        $(document).ready(function () {
-            $('#example').DataTable();
-        });
-    </script>
+    
 </body>
 </html>
