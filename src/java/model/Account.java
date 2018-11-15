@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.jpa;
+package model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,29 +23,27 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author User
+ * @author Windows 10
  */
 @Entity
 @Table(name = "ACCOUNT")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
-    , @NamedQuery(name = "Account.findByUsername", query = "SELECT a FROM Account a WHERE a.username = :username")
+    , @NamedQuery(name = "Account.findByAccountid", query = "SELECT a FROM Account a WHERE a.accountid = :accountid")
     , @NamedQuery(name = "Account.findByFname", query = "SELECT a FROM Account a WHERE a.fname = :fname")
     , @NamedQuery(name = "Account.findByLname", query = "SELECT a FROM Account a WHERE a.lname = :lname")
     , @NamedQuery(name = "Account.findByAddress", query = "SELECT a FROM Account a WHERE a.address = :address")
     , @NamedQuery(name = "Account.findByEmail", query = "SELECT a FROM Account a WHERE a.email = :email")
-    , @NamedQuery(name = "Account.findByTelno", query = "SELECT a FROM Account a WHERE a.telno = :telno")
-    , @NamedQuery(name = "Account.findByPaymentno", query = "SELECT a FROM Account a WHERE a.paymentno = :paymentno")})
+    , @NamedQuery(name = "Account.findByTelno", query = "SELECT a FROM Account a WHERE a.telno = :telno")})
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 15)
-    @Column(name = "USERNAME")
-    private String username;
+    @Column(name = "ACCOUNTID")
+    private Integer accountid;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -71,20 +69,18 @@ public class Account implements Serializable {
     @NotNull
     @Column(name = "TELNO")
     private int telno;
-    @Column(name = "PAYMENTNO")
-    private Integer paymentno;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountid")
     private List<History> historyList;
 
     public Account() {
     }
 
-    public Account(String username) {
-        this.username = username;
+    public Account(Integer accountid) {
+        this.accountid = accountid;
     }
 
-    public Account(String username, String fname, String lname, String address, String email, int telno) {
-        this.username = username;
+    public Account(Integer accountid, String fname, String lname, String address, String email, int telno) {
+        this.accountid = accountid;
         this.fname = fname;
         this.lname = lname;
         this.address = address;
@@ -92,12 +88,12 @@ public class Account implements Serializable {
         this.telno = telno;
     }
 
-    public String getUsername() {
-        return username;
+    public Integer getAccountid() {
+        return accountid;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAccountid(Integer accountid) {
+        this.accountid = accountid;
     }
 
     public String getFname() {
@@ -140,14 +136,6 @@ public class Account implements Serializable {
         this.telno = telno;
     }
 
-    public Integer getPaymentno() {
-        return paymentno;
-    }
-
-    public void setPaymentno(Integer paymentno) {
-        this.paymentno = paymentno;
-    }
-
     @XmlTransient
     public List<History> getHistoryList() {
         return historyList;
@@ -160,7 +148,7 @@ public class Account implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (username != null ? username.hashCode() : 0);
+        hash += (accountid != null ? accountid.hashCode() : 0);
         return hash;
     }
 
@@ -171,7 +159,7 @@ public class Account implements Serializable {
             return false;
         }
         Account other = (Account) object;
-        if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username))) {
+        if ((this.accountid == null && other.accountid != null) || (this.accountid != null && !this.accountid.equals(other.accountid))) {
             return false;
         }
         return true;
@@ -179,7 +167,7 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "Model.jpa.Account[ username=" + username + " ]";
+        return "model.Account[ accountid=" + accountid + " ]";
     }
     
 }

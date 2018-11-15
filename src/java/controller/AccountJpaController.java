@@ -3,28 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.Jpa.Controller;
+package controller;
 
-import Model.Jpa.Account;
-import Model.Jpa.Controller.exceptions.IllegalOrphanException;
-import Model.Jpa.Controller.exceptions.NonexistentEntityException;
-import Model.Jpa.Controller.exceptions.PreexistingEntityException;
-import Model.Jpa.Controller.exceptions.RollbackFailureException;
+import controller.exceptions.IllegalOrphanException;
+import controller.exceptions.NonexistentEntityException;
+import controller.exceptions.PreexistingEntityException;
+import controller.exceptions.RollbackFailureException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Model.Jpa.History;
+import model.History;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
+import model.Account;
 
 /**
  *
- * @author User
+ * @author Windows 10
  */
 public class AccountJpaController implements Serializable {
 

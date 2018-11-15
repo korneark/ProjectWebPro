@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.jpa;
+package model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author User
+ * @author Windows 10
  */
 @Entity
 @Table(name = "HISTORY")
@@ -33,8 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "History.findAll", query = "SELECT h FROM History h")
     , @NamedQuery(name = "History.findByHistoryid", query = "SELECT h FROM History h WHERE h.historyid = :historyid")
     , @NamedQuery(name = "History.findByTime", query = "SELECT h FROM History h WHERE h.time = :time")
-    , @NamedQuery(name = "History.findByPaymentmethod", query = "SELECT h FROM History h WHERE h.paymentmethod = :paymentmethod")
-    , @NamedQuery(name = "History.findByPaymentno", query = "SELECT h FROM History h WHERE h.paymentno = :paymentno")})
+    , @NamedQuery(name = "History.findByProductname", query = "SELECT h FROM History h WHERE h.productname = :productname")
+    , @NamedQuery(name = "History.findByProductprice", query = "SELECT h FROM History h WHERE h.productprice = :productprice")
+    , @NamedQuery(name = "History.findByProductquantity", query = "SELECT h FROM History h WHERE h.productquantity = :productquantity")})
 public class History implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,16 +51,20 @@ public class History implements Serializable {
     private Date time;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 15)
-    @Column(name = "PAYMENTMETHOD")
-    private String paymentmethod;
+    @Size(min = 1, max = 75)
+    @Column(name = "PRODUCTNAME")
+    private String productname;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "PAYMENTNO")
-    private int paymentno;
-    @JoinColumn(name = "USERNAME", referencedColumnName = "USERNAME")
+    @Column(name = "PRODUCTPRICE")
+    private double productprice;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "PRODUCTQUANTITY")
+    private int productquantity;
+    @JoinColumn(name = "ACCOUNTID", referencedColumnName = "ACCOUNTID")
     @ManyToOne(optional = false)
-    private Account username;
+    private Account accountid;
     @JoinColumn(name = "PRODUCTID", referencedColumnName = "PRODUCTID")
     @ManyToOne(optional = false)
     private Product productid;
@@ -71,11 +76,12 @@ public class History implements Serializable {
         this.historyid = historyid;
     }
 
-    public History(Integer historyid, Date time, String paymentmethod, int paymentno) {
+    public History(Integer historyid, Date time, String productname, double productprice, int productquantity) {
         this.historyid = historyid;
         this.time = time;
-        this.paymentmethod = paymentmethod;
-        this.paymentno = paymentno;
+        this.productname = productname;
+        this.productprice = productprice;
+        this.productquantity = productquantity;
     }
 
     public Integer getHistoryid() {
@@ -94,28 +100,36 @@ public class History implements Serializable {
         this.time = time;
     }
 
-    public String getPaymentmethod() {
-        return paymentmethod;
+    public String getProductname() {
+        return productname;
     }
 
-    public void setPaymentmethod(String paymentmethod) {
-        this.paymentmethod = paymentmethod;
+    public void setProductname(String productname) {
+        this.productname = productname;
     }
 
-    public int getPaymentno() {
-        return paymentno;
+    public double getProductprice() {
+        return productprice;
     }
 
-    public void setPaymentno(int paymentno) {
-        this.paymentno = paymentno;
+    public void setProductprice(double productprice) {
+        this.productprice = productprice;
     }
 
-    public Account getUsername() {
-        return username;
+    public int getProductquantity() {
+        return productquantity;
     }
 
-    public void setUsername(Account username) {
-        this.username = username;
+    public void setProductquantity(int productquantity) {
+        this.productquantity = productquantity;
+    }
+
+    public Account getAccountid() {
+        return accountid;
+    }
+
+    public void setAccountid(Account accountid) {
+        this.accountid = accountid;
     }
 
     public Product getProductid() {
@@ -148,7 +162,7 @@ public class History implements Serializable {
 
     @Override
     public String toString() {
-        return "Model.jpa.History[ historyid=" + historyid + " ]";
+        return "model.History[ historyid=" + historyid + " ]";
     }
     
 }
