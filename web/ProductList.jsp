@@ -37,25 +37,25 @@
             <th>No</th>
             <th>Product Code</th>
             <th>Product Name</th>
-            <th>Product Line</th>
-            <th>Scale</th>
+            <th>Product Quantity</th>
+            <th>Product Type</th>
             <th>Price</th>
             <th>Add To Cart</th>
             <th>Remove Form Cart</th>
         </thead>
-        <c:forEach items="${products}" var="p" varStatus="vs">
+        <c:forEach items="${product}" var="p" varStatus="vs">
             <tr>
-                <td><img src="model-images/${p.productcode}.jpg" width="120"></td>
+                <td><img src="Pic/${product.productid}.jpg" width="120"></td>
                 <td>${vs.count}</td>
-                <td><a href="GetProduct?productCode=${p.productcode}">${p.productcode}</a></td>
+                <td><a href="GetProduct?productCode=${product.productid}">${product.productid}</a></td>
                 <td>${product.productname}</td>
-                <td>${p.productline.productline}</td>
-                <td>${p.productscale}</td>
-                <td>${p.msrp}</td>
-                <td><a href="AddItemToCart?productCode=${p.productcode}">
+                <td>${product.productquantity}</td>
+                <td>${product.producttype}</td>
+                <td>${product.productprice}</td>
+                <td><a href="AddItemToCart?productCode=${product.productid}">
                         <input type="button" value="Add To Cart"></a></td>
                 <td>
-                    <a href="RemoveItemFormCart?productCode=${p.productcode}">
+                    <a href="RemoveItemFormCart?productCode=${product.productid}">
                         <input type="button" value="Remove"></a></td>        
             </tr>
         </c:forEach>
