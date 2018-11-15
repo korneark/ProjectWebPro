@@ -23,7 +23,7 @@ html {
 }
 
 body {
-  background-image:  transparent;
+  background:  transparent;
 }
 
 body, input, button {
@@ -53,8 +53,8 @@ body, input, button {
 
     h2 {
       font-size: 3em;
-      font-weight: 300;
-      color: rgba(255, 255, 255, 0.7);
+      font-weight: 3000;
+      color: whitesmoke;
       display: inline-block;
       padding-bottom: 5px;
       text-shadow: 1px 1px 3px $shadow-color;
