@@ -67,7 +67,7 @@
           </div>
         <br>
         <div class="input-group input-group-lg">
-        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <span class="input-group-addon"><i class=""></i></span>
         <input type="number" class="form-control" placeholder="Credit Card" name="card">
           </div>
         <br>

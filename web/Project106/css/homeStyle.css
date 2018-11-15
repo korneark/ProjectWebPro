@@ -1,0 +1,50 @@
+body{
+	background-image: url("wallpaper.jpg");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;	
+}
+.jumbotron{
+	text-align: center;
+	opacity: 0.8;
+}
+.fontLob{
+	font-family: 'Lobster', cursive;
+}
+#bt{
+	text-align: center;
+}
+footer{
+	color: black;
+}
+h2{
+	background-color: white;
+	color: black;
+	height: 100px;
+	opacity: 0.8;
+	font-family: 'Lobster', cursive;
+	font-size: 20px
+}
+#product{
+	text-align: center;	
+	opacity: 0.9;	
+}
+.b{
+	color: black;
+	font-size: 20px;	
+}
+
+
+.fontC{
+	font-family: 'Courgette', cursive;
+
+}
+.fontsize{
+	font-size: 50px;
+}
+
+.fontfrom{
+	font-family: 'Courgette', cursive;
+	font-size: 30px;
+}
+

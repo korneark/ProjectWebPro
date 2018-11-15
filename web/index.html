@@ -6,11 +6,47 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TODO supply a title</title>
+        <link rel="stylesheet" href="CSS/login.css"/>
+        <style>
+            
+      .index{
+          margin-top: 200px;
+   margin-left: 350px;
+}  
+            button {
+      margin-top: 20px;
+      margin-left: 350px;
+      background: $button-background-color;
+      border: none;
+      font-size: 1.6em;
+      font-weight: 300;
+      padding: 5px 0;
+      width: 51%;
+      border-radius: 3px;
+      color: lighten($button-background-color, 40%);
+      border-bottom: 4px solid darken($button-background-color, 10%);
+
+      &:hover {
+        background: tint($button-background-color, 4%);
+        -webkit-animation: hop 1s;
+        animation: hop 1s;
+        
+        </style>
     </head>
     <body>
-        <div>TODO write content</div>
+        <div class="index">
+            <image src="Pic/index.jpg"/>
+        </div>
+        <div class="heading">          
+            <form action="LogIn">
+                <button type="submit" class="float">Login</button>
+            </form>
+            <form action="Register">
+                <button type="submit" class="float">Website</button>
+            </form>
+        </div>
     </body>
 </html>
