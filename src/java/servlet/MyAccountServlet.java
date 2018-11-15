@@ -5,29 +5,20 @@
  */
 package servlet;
 
-import Model.Jpa.Controller.AccountJpaController;
-import Model.jpa.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.annotation.Resource;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.transaction.UserTransaction;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Windows 10
  */
-public class LogInSevlet extends HttpServlet {
-@Resource
-    UserTransaction utx;
-    
-    @PersistenceUnit(unitName = "ProjectWebProPU")
-    EntityManagerFactory emf;
+public class MyAccountServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,23 +28,13 @@ public class LogInSevlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        if(username!=null&&password!=null){
-            AccountJpaController acCtrl = new AccountJpaController(utx, emf);
-            Account ac = acCtrl.findAccount(String.valueOf(username));
-            if(ac!=null){
-                if(Integer.valueOf(password).equals(ac.getTelno())){
-                    request.getSession().setAttribute("ac", ac);
-                    getServletContext().getRequestDispatcher("/MyAccount.jsp").forward(request, response);
-                    return;
-                }
-            }
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            getServletContext().getRequestDispatcher("/MyAccount.jsp").forward(request, response);
         }
-        getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
-    }
+        getServletContext().getRequestDispatcher("/LogIn").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
