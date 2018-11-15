@@ -34,7 +34,7 @@
         <div class="login">
   <div class="heading">
     <h2>Sign in</h2>
-    <form action="Login">
+    <form action="LogIn">
 
       <div class="input-group input-group-lg">
         <span class="input-group-addon"><i class="fa fa-user"></i></span>
