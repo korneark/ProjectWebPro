@@ -5,18 +5,30 @@
  */
 package servlet;
 
+import Model.Jpa.Account;
+import Model.Jpa.Controller.AccountJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.UserTransaction;
 
 /**
  *
  * @author Windows 10
  */
 public class LoginServlet extends HttpServlet {
+
+    @Resource
+    UserTransaction utx;
+
+    @PersistenceUnit(unitName = "ProjectWebProPU")
+    EntityManagerFactory emf;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,19 +41,21 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        if (username.length() > 0 && username != null && password.length() > 0 && password != null) {
+            AccountJpaController acCtrl = new AccountJpaController(utx, emf);
+            Account ac = acCtrl.findAccount(Integer.valueOf(username));
+            if (ac != null) {
+                if (Integer.valueOf(password).equals(ac.getTelno())) {
+                    request.getSession().setAttribute("ac", ac);
+                    getServletContext().getRequestDispatcher("/ProductList.jsp").forward(request, response);
+                    return;
+                }
+            }
+            request.setAttribute("Message", "Invalid Username or Password");
         }
+        getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
