@@ -45,8 +45,24 @@
           <span class="input-group-addon"><i class="fa fa-lock"></i></span>
           <input type="password" class="form-control" placeholder="Password" name="password">
         </div>
+        <br>
+        <div class="input-group input-group-lg">
+        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <input type="text" class="form-control" placeholder="Address1" name="address1">
+          </div>
+        <br>
+        <div class="input-group input-group-lg">
+        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <input type="text" class="form-control" placeholder="Address2" name="address2">
+          </div>
+        <br>
+        <div class="input-group input-group-lg">
+        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <input type="text" class="form-control" placeholder="Address3" name="address3">
+          </div>
+        <br>
 
-        <button type="submit" class="float">Login</button>
+        <button type="submit" class="float">Register</button>
        </form>
  		</div>
  </div>
