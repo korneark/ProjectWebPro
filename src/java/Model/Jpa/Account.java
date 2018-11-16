@@ -113,6 +113,18 @@ public class Account implements Serializable {
         this.telno = telno;
     }
 
+    public Account(String username, String password, String fName, String lName, String sex, String address, String email, Integer valueOf, Integer valueOf0) {
+        this.username = username;
+        this.password=password;
+        this.fname = fname;
+        this.lname = lname;
+        this.sex= sex;
+        this.address = address;
+        this.email = email;
+        this.telno = valueOf;
+        this.paymentno=valueOf;
+    }
+
     public String getUsername() {
         return username;
     }

@@ -34,7 +34,7 @@
         <div class="login">
   <div class="heading">
     <h2>Register</h2>
-    <form action="Login">
+    <form action="Register">
 
       <div class="input-group input-group-lg">
         <span class="input-group-addon"><i class="fa fa-user"></i></span>
@@ -48,27 +48,37 @@
         <br>
         <div class="input-group input-group-lg">
         <span class="input-group-addon"><i class="fa "></i></span>
-        <input type="text" class="form-control" placeholder="Address1" name="address1">
+        <input type="text" class="form-control" placeholder="fname" name="fName">
           </div>
         <br>
         <div class="input-group input-group-lg">
         <span class="input-group-addon"><i class=""></i></span>
-        <input type="text" class="form-control" placeholder="Address2" name="address2">
+        <input type="text" class="form-control" placeholder="lname" name="lName">
           </div>
         <br>
         <div class="input-group input-group-lg">
         <span class="input-group-addon"><i class=""></i></span>
-        <input type="text" class="form-control" placeholder="Address3" name="address3">
+        <input type="text" class="form-control" placeholder="sex" name="sex">
           </div>
         <br>
         <div class="input-group input-group-lg">
         <span class="input-group-addon"><i class=""></i></span>
-        <input type="number" class="form-control" placeholder="Telephone" name="tel">
+        <input type="number" class="form-control" placeholder="Address" name="address">
           </div>
         <br>
         <div class="input-group input-group-lg">
         <span class="input-group-addon"><i class=""></i></span>
-        <input type="number" class="form-control" placeholder="Credit Card" name="card">
+        <input type="number" class="form-control" placeholder="Email" name="email">
+          </div>
+        <br>
+                <div class="input-group input-group-lg">
+        <span class="input-group-addon"><i class=""></i></span>
+        <input type="number" class="form-control" placeholder="TelNo" name="telNo">
+          </div>
+        <br>
+                <div class="input-group input-group-lg">
+        <span class="input-group-addon"><i class=""></i></span>
+        <input type="number" class="form-control" placeholder="Payment No" name="paymentNo">
           </div>
         <br>
         <button type="submit" class="float">Register</button>

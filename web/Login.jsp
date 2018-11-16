@@ -47,7 +47,7 @@
         </div>
 
         <button type="submit" class="float">Login</button>
-        <button type="submit" class="float">Register</button>
+        <a href ="Register">Register</a>
        </form>
  		</div>
  </div>

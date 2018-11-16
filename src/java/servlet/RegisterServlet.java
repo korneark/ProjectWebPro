@@ -5,12 +5,13 @@
  */
 package servlet;
 
-
-import Model.Jpa.Controller.ProductJpaController;
-import Model.Jpa.Product;
+import Model.Jpa.Account;
+import Model.Jpa.Controller.AccountJpaController;
+import Model.Jpa.Controller.exceptions.RollbackFailureException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -20,24 +21,51 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
 
-
-
 /**
  *
  * @author INT303
  */
-public class ProductListServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
+
     @Resource
     UserTransaction utx;
-    @PersistenceUnit (unitName = "ProjectWebProPU")
+
+    @PersistenceUnit(unitName = "ProjectWebProPU")
     EntityManagerFactory emf;
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductJpaController proCtrl = new ProductJpaController(utx, emf);
-        List<Product> product = proCtrl.findProductEntities();
-        request.setAttribute("product", product);
-        getServletContext().getRequestDispatcher("/ProductList.jsp").forward(request, response);        
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String fName = request.getParameter("fName");
+        String lName = request.getParameter("lname");
+        String sex = request.getParameter("sex");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+        String telNo = request.getParameter("telNo");
+        String paymentNo = request.getParameter("paymentNo");
+        if (username != null && password != null) {
+            Account ac = new Account(username, password, fName, lName, sex, address, email, Integer.valueOf(telNo), Integer.valueOf(paymentNo));
+            AccountJpaController acCtrl = new AccountJpaController(utx, emf);
+            try{
+                acCtrl.create(ac);
+            } catch (RollbackFailureException ex) {
+                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+                    getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+        }
+        getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
