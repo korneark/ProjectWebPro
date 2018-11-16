@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package Model.Jpa;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -148,7 +148,7 @@ public class History implements Serializable {
 
     @Override
     public String toString() {
-        return "model.History[ historyid=" + historyid + " ]";
+        return "Model.Jpa.History[ historyid=" + historyid + " ]";
     }
     
 }
