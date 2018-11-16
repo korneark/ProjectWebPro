@@ -3,27 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model.Controller;
+package controller;
 
+import controller.exceptions.NonexistentEntityException;
+import controller.exceptions.PreexistingEntityException;
+import controller.exceptions.RollbackFailureException;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import Model.Account;
-import Model.Controller.exceptions.NonexistentEntityException;
-import Model.Controller.exceptions.PreexistingEntityException;
-import Model.Controller.exceptions.RollbackFailureException;
-import Model.History;
-import Model.Product;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.transaction.UserTransaction;
+import model.Account;
+import model.History;
+import model.Product;
 
 /**
  *
- * @author elesi
+ * @author INT303
  */
 public class HistoryJpaController implements Serializable {
 

@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Windows 10
+ * @author INT303
  */
 @Entity
 @Table(name = "PRODUCT")
@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Product.findByProductname", query = "SELECT p FROM Product p WHERE p.productname = :productname")
     , @NamedQuery(name = "Product.findByProductprice", query = "SELECT p FROM Product p WHERE p.productprice = :productprice")
     , @NamedQuery(name = "Product.findByProductquantity", query = "SELECT p FROM Product p WHERE p.productquantity = :productquantity")
+    , @NamedQuery(name = "Product.findByProducttype", query = "SELECT p FROM Product p WHERE p.producttype = :producttype")
     , @NamedQuery(name = "Product.findByProductdetail", query = "SELECT p FROM Product p WHERE p.productdetail = :productdetail")})
 public class Product implements Serializable {
 
@@ -58,6 +59,11 @@ public class Product implements Serializable {
     private int productquantity;
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "PRODUCTTYPE")
+    private String producttype;
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 300)
     @Column(name = "PRODUCTDETAIL")
     private String productdetail;
@@ -71,11 +77,12 @@ public class Product implements Serializable {
         this.productid = productid;
     }
 
-    public Product(Integer productid, String productname, double productprice, int productquantity, String productdetail) {
+    public Product(Integer productid, String productname, double productprice, int productquantity, String producttype, String productdetail) {
         this.productid = productid;
         this.productname = productname;
         this.productprice = productprice;
         this.productquantity = productquantity;
+        this.producttype = producttype;
         this.productdetail = productdetail;
     }
 
@@ -109,6 +116,14 @@ public class Product implements Serializable {
 
     public void setProductquantity(int productquantity) {
         this.productquantity = productquantity;
+    }
+
+    public String getProducttype() {
+        return producttype;
+    }
+
+    public void setProducttype(String producttype) {
+        this.producttype = producttype;
     }
 
     public String getProductdetail() {

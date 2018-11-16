@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Windows 10
+ * @author INT303
  */
 @Entity
 @Table(name = "HISTORY")

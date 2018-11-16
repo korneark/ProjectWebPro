@@ -6,9 +6,7 @@
 package servlet;
 
 
-
-import Model.Controller.ProductJpaController;
-import Model.Product;
+import controller.ProductJpaController;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -20,9 +18,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.UserTransaction;
+import model.Product;
 
 
-
+/**
+ *
+ * @author INT303
+ */
 public class ProductListServlet extends HttpServlet {
     @Resource
     UserTransaction utx;
