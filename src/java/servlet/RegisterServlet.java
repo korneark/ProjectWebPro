@@ -5,9 +5,11 @@
  */
 package servlet;
 
-import Model.Jpa.Account;
-import Model.Jpa.Controller.AccountJpaController;
+
+import Model.Jpa.Controller.RegisterJpaController;
 import Model.Jpa.Controller.exceptions.RollbackFailureException;
+import Model.Jpa.Register;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -47,23 +49,22 @@ public class RegisterServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String fName = request.getParameter("fName");
-        String lName = request.getParameter("lname");
-        String sex = request.getParameter("sex");
-        String address = request.getParameter("address");
+        String lName = request.getParameter("lName");
         String email = request.getParameter("email");
+        String address = request.getParameter("address");
         String telNo = request.getParameter("telNo");
-        String paymentNo = request.getParameter("paymentNo");
-        if (username != null && password != null) {
-            Account ac = new Account(username, password, fName, lName, sex, address, email, Integer.valueOf(telNo), Integer.valueOf(paymentNo));
-            AccountJpaController acCtrl = new AccountJpaController(utx, emf);
+        String creditCard = request.getParameter("creditCard");
+        if(username!=null&&password!=null){
+            Register re = new Register(username, password,fName,lName,email,address,Integer.valueOf(telNo),Integer.valueOf(creditCard));
+            RegisterJpaController reCtrl = new RegisterJpaController(utx, emf);
             try{
-                acCtrl.create(ac);
+                reCtrl.create(re);
             } catch (RollbackFailureException ex) {
                 Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
                 Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
-                    getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
         }
         getServletContext().getRequestDispatcher("/Register.jsp").forward(request, response);
     }

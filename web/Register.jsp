@@ -58,17 +58,12 @@
         <br>
         <div class="input-group input-group-lg">
         <span class="input-group-addon"><i class=""></i></span>
-        <input type="text" class="form-control" placeholder="sex" name="sex">
+        <input type="email" class="form-control" placeholder="Email" name="email">
           </div>
         <br>
         <div class="input-group input-group-lg">
         <span class="input-group-addon"><i class=""></i></span>
-        <input type="number" class="form-control" placeholder="Address" name="address">
-          </div>
-        <br>
-        <div class="input-group input-group-lg">
-        <span class="input-group-addon"><i class=""></i></span>
-        <input type="number" class="form-control" placeholder="Email" name="email">
+        <input type="text" class="form-control" placeholder="Address" name="address">
           </div>
         <br>
                 <div class="input-group input-group-lg">
@@ -78,7 +73,7 @@
         <br>
                 <div class="input-group input-group-lg">
         <span class="input-group-addon"><i class=""></i></span>
-        <input type="number" class="form-control" placeholder="Payment No" name="paymentNo">
+        <input type="number" class="form-control" placeholder="Payment No" name="creditCard">
           </div>
         <br>
         <button type="submit" class="float">Register</button>

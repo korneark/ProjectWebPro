@@ -7,43 +7,38 @@ package Model.Jpa;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author INT303
  */
 @Entity
-@Table(name = "ACCOUNT")
+@Table(name = "REGISTER")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Account.findAll", query = "SELECT a FROM Account a")
-    , @NamedQuery(name = "Account.findByUsername", query = "SELECT a FROM Account a WHERE a.username = :username")
-    , @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password")
-    , @NamedQuery(name = "Account.findByFname", query = "SELECT a FROM Account a WHERE a.fname = :fname")
-    , @NamedQuery(name = "Account.findByLname", query = "SELECT a FROM Account a WHERE a.lname = :lname")
-    , @NamedQuery(name = "Account.findBySex", query = "SELECT a FROM Account a WHERE a.sex = :sex")
-    , @NamedQuery(name = "Account.findByAddress", query = "SELECT a FROM Account a WHERE a.address = :address")
-    , @NamedQuery(name = "Account.findByEmail", query = "SELECT a FROM Account a WHERE a.email = :email")
-    , @NamedQuery(name = "Account.findByTelno", query = "SELECT a FROM Account a WHERE a.telno = :telno")
-    , @NamedQuery(name = "Account.findByRegisterdate", query = "SELECT a FROM Account a WHERE a.registerdate = :registerdate")
-    , @NamedQuery(name = "Account.findByPaymentno", query = "SELECT a FROM Account a WHERE a.paymentno = :paymentno")})
-public class Account implements Serializable {
+    @NamedQuery(name = "Register.findAll", query = "SELECT r FROM Register r")
+    , @NamedQuery(name = "Register.findByUsername", query = "SELECT r FROM Register r WHERE r.username = :username")
+    , @NamedQuery(name = "Register.findByPassword", query = "SELECT r FROM Register r WHERE r.password = :password")
+    , @NamedQuery(name = "Register.findByFname", query = "SELECT r FROM Register r WHERE r.fname = :fname")
+    , @NamedQuery(name = "Register.findByLname", query = "SELECT r FROM Register r WHERE r.lname = :lname")
+    , @NamedQuery(name = "Register.findByEmail", query = "SELECT r FROM Register r WHERE r.email = :email")
+    , @NamedQuery(name = "Register.findByAddress", query = "SELECT r FROM Register r WHERE r.address = :address")
+    , @NamedQuery(name = "Register.findByTelno", query = "SELECT r FROM Register r WHERE r.telno = :telno")
+    , @NamedQuery(name = "Register.findByCreditcard", query = "SELECT r FROM Register r WHERE r.creditcard = :creditcard")
+    , @NamedQuery(name = "Register.findByRegisterdate", query = "SELECT r FROM Register r WHERE r.registerdate = :registerdate")})
+public class Register implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -54,63 +49,51 @@ public class Account implements Serializable {
     private String username;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 40)
+    @Size(min = 1, max = 15)
     @Column(name = "PASSWORD")
     private String password;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 30)
     @Column(name = "FNAME")
     private String fname;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 30)
     @Column(name = "LNAME")
     private String lname;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 3)
-    @Column(name = "SEX")
-    private String sex;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 250)
-    @Column(name = "ADDRESS")
-    private String address;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 30)
     @Column(name = "EMAIL")
     private String email;
-    @Basic(optional = false)
-    @NotNull
+    @Size(max = 500)
+    @Column(name = "ADDRESS")
+    private String address;
     @Column(name = "TELNO")
-    private int telno;
+    private Integer telno;
+    @Column(name = "CREDITCARD")
+    private Integer creditcard;
     @Column(name = "REGISTERDATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date registerdate;
-    @Column(name = "PAYMENTNO")
-    private Integer paymentno;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
-    private List<History> historyList;
 
-    public Account() {
+    public Register() {
     }
 
-    public Account(String username) {
+    public Register(String username) {
         this.username = username;
     }
 
-    public Account(String username, String password, String fname, String lname, String sex, String address, String email, int telno) {
+    public Register(String username, String password) {
         this.username = username;
         this.password = password;
-        this.fname = fname;
-        this.lname = lname;
-        this.sex = sex;
-        this.address = address;
+    }
+
+    public Register(String username, String password, String fName, String lName, String email, String address, Integer valueOf, Integer valueOf0) {
+        this.username = username;
+        this.password = password;
+        this.fname = fName;
+        this.lname = lName;
         this.email = email;
-        this.telno = telno;
+        this.address = address;
+        this.telno = valueOf;
+        this.creditcard = valueOf0;
     }
 
     public String getUsername() {
@@ -145,12 +128,12 @@ public class Account implements Serializable {
         this.lname = lname;
     }
 
-    public String getSex() {
-        return sex;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAddress() {
@@ -161,20 +144,20 @@ public class Account implements Serializable {
         this.address = address;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getTelno() {
+    public Integer getTelno() {
         return telno;
     }
 
-    public void setTelno(int telno) {
+    public void setTelno(Integer telno) {
         this.telno = telno;
+    }
+
+    public Integer getCreditcard() {
+        return creditcard;
+    }
+
+    public void setCreditcard(Integer creditcard) {
+        this.creditcard = creditcard;
     }
 
     public Date getRegisterdate() {
@@ -183,23 +166,6 @@ public class Account implements Serializable {
 
     public void setRegisterdate(Date registerdate) {
         this.registerdate = registerdate;
-    }
-
-    public Integer getPaymentno() {
-        return paymentno;
-    }
-
-    public void setPaymentno(Integer paymentno) {
-        this.paymentno = paymentno;
-    }
-
-    @XmlTransient
-    public List<History> getHistoryList() {
-        return historyList;
-    }
-
-    public void setHistoryList(List<History> historyList) {
-        this.historyList = historyList;
     }
 
     @Override
@@ -212,10 +178,10 @@ public class Account implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Account)) {
+        if (!(object instanceof Register)) {
             return false;
         }
-        Account other = (Account) object;
+        Register other = (Register) object;
         if ((this.username == null && other.username != null) || (this.username != null && !this.username.equals(other.username))) {
             return false;
         }
@@ -224,7 +190,7 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "Model.Jpa.Account[ username=" + username + " ]";
+        return "Model.Jpa.Register[ username=" + username + " ]";
     }
     
 }
