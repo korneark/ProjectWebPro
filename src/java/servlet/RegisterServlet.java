@@ -6,14 +6,15 @@
 package servlet;
 
 
-import Model.Jpa.Controller.RegisterJpaController;
+import Model.Jpa.Account;
+import Model.Jpa.Controller.AccountJpaController;
 import Model.Jpa.Controller.exceptions.RollbackFailureException;
-import Model.Jpa.Register;
-
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.chart.PieChart;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -55,10 +56,10 @@ public class RegisterServlet extends HttpServlet {
         String telNo = request.getParameter("telNo");
         String creditCard = request.getParameter("creditCard");
         if(username!=null&&password!=null){
-            Register re = new Register(username, password,fName,lName,email,address,Integer.valueOf(telNo),Integer.valueOf(creditCard));
-            RegisterJpaController reCtrl = new RegisterJpaController(utx, emf);
+            Account ac = new Account(username, password,fName,lName,email,address,Integer.valueOf(telNo),new Date());
+            AccountJpaController acCtrl = new AccountJpaController(utx, emf);
             try{
-                reCtrl.create(re);
+                acCtrl.create(ac);
             } catch (RollbackFailureException ex) {
                 Logger.getLogger(RegisterServlet.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
