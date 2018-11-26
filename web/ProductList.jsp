@@ -18,25 +18,40 @@
         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="table">
-            
-        <table id="example" class="table">
-            <thead>
-            <th>Image</th>
-            <th>No</th>
-            <th>Product Id</th>
-            <th>Product Name</th>            
-        </thead>
-        <c:forEach items="${product}" var="p" varStatus="vs">
-            <tr>
-                <td><img src="Pic/${p.productid}.jpg" width="120"></td>
-                <td>${vs.count}</td>
-                <td><a href="GetProduct?productId=${p.productid}">${p.productid}</a></td>
-                <td>${p.productname}</td>                       
-            </tr>
-        </c:forEach>
+           <table class="table">
+        <tr>
+            <td>
+                <c:if test="${cart != null}">
+                    <a href="ShowCart.jsp">Your Cart: (${cart.totalQuantity})</a>
+                </c:if>
+            </td>
+        </tr>
     </table>
+        <div class="table">
+
+            <table id="example" class="table">
+                <thead>
+                <th>Image</th>
+                <th>No</th>
+                <th>Product Id</th>
+                <th>Product Name</th>  
+                <th>Product Detail</th>
+                <th>Add</th>
+                </thead>
+                <c:forEach items="${product}" var="p" varStatus="vs">
+                    <tr>
+                        <td><img src="Pic/${p.productid}.jpg" width="120"></td>
+                        <td>${vs.count}</td>
+                        <td><a href="GetProduct?productId=${p.productid}">${p.productid}</a></td>
+                        <td>${p.productname}</td>                       
+                        <td>${p.productdetail}</td>     
+                        <td> <a href="AddToCart?productCode=${p.productid}">
+                                <input type="button" value="Add to cart"/>
+                            </a>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
         </div>
-    
 </body>
 </html>
