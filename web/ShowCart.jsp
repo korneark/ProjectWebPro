@@ -13,6 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <jsp:include page="Header.jsp"/>
                         <table id="example" class="table">
             <thead>
             <th>Image</th>

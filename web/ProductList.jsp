@@ -18,6 +18,7 @@
         <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
     </head>
     <body>
+        <jsp:include page="Header.jsp"/>
            <table class="table">
         <tr>
             <td>
