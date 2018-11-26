@@ -14,7 +14,7 @@
     </head>
     <body>
         <jsp:include page="Header.jsp"/>
-                        <table id="example" class="table">
+        <table id="example" class="table">
             <thead>
             <th>Image</th>
             <th>No</th>
@@ -24,11 +24,11 @@
             <th>Price</th>
             <th>Total Price</th>
         </thead>
-        
+
         <c:set var="items" value="${sessionScope.cart.lineItems}"/>
         <c:set var="bgColorX" value="lightgray" />
         <c:set var="bgColorY" value="white" />
-        
+
         <c:forEach items="${cart.lineItems}" var="line" varStatus="vs">
             <tr style="background-color: ${vs.count%2==1 ? bgColorX:colrY}">
                 <td><img src="Pic/${line.product.productid}.jpg" width="120"></td>
@@ -38,15 +38,20 @@
                 <td>${line.quantity}</td>
                 <td>${line.product.productprice}</td>
                 <td>${line.totalPrice}</td>
+                <td><a href="RemoveProductInCart?productId=${line.product.productid}">
+                        <input type="button" value="Remove to cart"/>
+                    </a>
+                </td>
             </tr>
         </c:forEach>
-            <tr>
-                <td colspan="4"></td>
-                
-                <td>${cart.totalQuantity}</td>
-                <td></td>
-                <td>${cart.totalPrice}</td>
-            </tr>
+        <tr>
+            <td colspan="4"></td>
+
+            <td>${cart.totalQuantity}</td>
+            <td></td>
+            <td>${cart.totalPrice}</td>
+        </tr>
     </table>
-    </body>
+</body>
 </html>
+
