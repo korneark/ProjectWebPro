@@ -50,5 +50,76 @@ and open the template in the editor.
             
             
         </div>
+    <script language="JavaScript">
+
+//กำหนดความกว้างสายพานลำเลียง
+var sliderwidth=600
+//กำหนดความสูงสายพาน 
+var sliderheight=145
+//กำหนดความเร็วสายพาน
+var slidespeed=4
+
+//กำหนดรูปที่ต้องการและ LINK
+var leftrightslide=new Array()
+var finalslide=''
+leftrightslide[0]='<img border="0" src="Pic/1001.jpg">'
+leftrightslide[1]='<a href="http://www.geocities.com/namkiatv"><img border="0" src="Pic/1002.jpg></a>'
+leftrightslide[2]='<a href="http://www.geocities.com/namkiatv/java"><img border="0" src="Pic/1003.jpg"></a>'
+leftrightslide[3]='<a href="http://www.geocities.com/namkiatv/html"><img border="0" src="Pic/1004.jpg"></a></a>'
+leftrightslide[4]='<img border="0" src="../../images/wheel2.gif"></a>'
+
+
+
+var copyspeed=slidespeed
+//copy contents of leftrightslide into one variable
+for (i=0;i<leftrightslide.length;i++)
+finalslide=finalslide+leftrightslide[i]+"  "
+
+
+if (document.all){
+//dynamically write out the marquee tag
+document.write('<marquee id="ieslider" scrollAmount=0 style="width:'+sliderwidth+'">'+finalslide+'</marquee>')
+//stop marquee when mouse is over it
+ieslider.onmouseover=new Function("ieslider.scrollAmount=0")
+//re-enable marquee when mouse is out
+ieslider.onmouseout=new Function("if (document.readyState=='complete') ieslider.scrollAmount=slidespeed")
+}
+
+function regenerate(){
+window.location.reload()
+}
+function regenerate2(){
+if (document.layers){
+document.ns_slider01.visibility="show"
+setTimeout("window.onresize=regenerate",450)
+intializeleftrightslide()
+}
+if (document.all)
+ieslider.scrollAmount=slidespeed
+}
+
+//NS specific function for initializing slider upon page load
+function intializeleftrightslide(){
+document.ns_slider01.document.ns_slider02.document.write('<nobr>'+finalslide+'</nobr>')
+document. ns_slider01.document.ns_slider02.document.close()
+thelength=document.ns_slider01.document.ns_slider02.document.width
+scrollslide()
+}
+
+//NS specific function for sliding slideshow
+function scrollslide(){
+if (document.ns_slider01.document.ns_slider02.left>=thelength*(-1)){
+document.ns_slider01.document.ns_slider02.left-=slidespeed
+setTimeout("scrollslide()",100)
+}
+else{
+document.ns_slider01.document.ns_slider02.left=sliderwidth
+scrollslide()
+}
+}
+window.onload=regenerate2
+
+
+</script>    
     </body>
 </html>
