@@ -23,7 +23,7 @@ import javax.transaction.UserTransaction;
 
 /**
  *
- * @author INT303
+ * @author Narathip
  */
 public class HistoryJpaController implements Serializable {
 

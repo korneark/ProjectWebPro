@@ -24,7 +24,7 @@ import javax.transaction.UserTransaction;
 
 /**
  *
- * @author INT303
+ * @author Narathip
  */
 public class ProductJpaController implements Serializable {
 
@@ -129,7 +129,7 @@ public class ProductJpaController implements Serializable {
             }
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = product.getProductid();
+                String id = product.getProductid();
                 if (findProduct(id) == null) {
                     throw new NonexistentEntityException("The product with id " + id + " no longer exists.");
                 }
@@ -142,7 +142,7 @@ public class ProductJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
+    public void destroy(String id) throws IllegalOrphanException, NonexistentEntityException, RollbackFailureException, Exception {
         EntityManager em = null;
         try {
             utx.begin();
@@ -205,7 +205,7 @@ public class ProductJpaController implements Serializable {
         }
     }
 
-    public Product findProduct(Integer id) {
+    public Product findProduct(String id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Product.class, id);

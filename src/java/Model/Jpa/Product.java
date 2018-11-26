@@ -6,12 +6,14 @@
 package Model.Jpa;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -23,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author INT303
+ * @author Narathip
  */
 @Entity
 @Table(name = "PRODUCT")
@@ -34,25 +36,26 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Product.findByProductname", query = "SELECT p FROM Product p WHERE p.productname = :productname")
     , @NamedQuery(name = "Product.findByProductprice", query = "SELECT p FROM Product p WHERE p.productprice = :productprice")
     , @NamedQuery(name = "Product.findByProductquantity", query = "SELECT p FROM Product p WHERE p.productquantity = :productquantity")
-    , @NamedQuery(name = "Product.findByProducttype", query = "SELECT p FROM Product p WHERE p.producttype = :producttype")
-    , @NamedQuery(name = "Product.findByProductdetail", query = "SELECT p FROM Product p WHERE p.productdetail = :productdetail")})
+    , @NamedQuery(name = "Product.findByProducttype", query = "SELECT p FROM Product p WHERE p.producttype = :producttype")})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
+    @Size(min = 1, max = 15)
     @Column(name = "PRODUCTID")
-    private Integer productid;
+    private String productid;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 75)
     @Column(name = "PRODUCTNAME")
     private String productname;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "PRODUCTPRICE")
-    private double productprice;
+    private BigDecimal productprice;
     @Basic(optional = false)
     @NotNull
     @Column(name = "PRODUCTQUANTITY")
@@ -64,7 +67,7 @@ public class Product implements Serializable {
     private String producttype;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 300)
+    @Lob
     @Column(name = "PRODUCTDETAIL")
     private String productdetail;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productid")
@@ -73,11 +76,11 @@ public class Product implements Serializable {
     public Product() {
     }
 
-    public Product(Integer productid) {
+    public Product(String productid) {
         this.productid = productid;
     }
 
-    public Product(Integer productid, String productname, double productprice, int productquantity, String producttype, String productdetail) {
+    public Product(String productid, String productname, BigDecimal productprice, int productquantity, String producttype, String productdetail) {
         this.productid = productid;
         this.productname = productname;
         this.productprice = productprice;
@@ -86,11 +89,11 @@ public class Product implements Serializable {
         this.productdetail = productdetail;
     }
 
-    public Integer getProductid() {
+    public String getProductid() {
         return productid;
     }
 
-    public void setProductid(Integer productid) {
+    public void setProductid(String productid) {
         this.productid = productid;
     }
 
@@ -102,11 +105,11 @@ public class Product implements Serializable {
         this.productname = productname;
     }
 
-    public double getProductprice() {
+    public BigDecimal getProductprice() {
         return productprice;
     }
 
-    public void setProductprice(double productprice) {
+    public void setProductprice(BigDecimal productprice) {
         this.productprice = productprice;
     }
 

@@ -24,7 +24,7 @@ import javax.transaction.UserTransaction;
 
 /**
  *
- * @author INT303
+ * @author Narathip
  */
 public class AccountJpaController implements Serializable {
 

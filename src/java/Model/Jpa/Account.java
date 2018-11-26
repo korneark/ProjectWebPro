@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author INT303
+ * @author Narathip
  */
 @Entity
 @Table(name = "ACCOUNT")
@@ -37,12 +37,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password")
     , @NamedQuery(name = "Account.findByFname", query = "SELECT a FROM Account a WHERE a.fname = :fname")
     , @NamedQuery(name = "Account.findByLname", query = "SELECT a FROM Account a WHERE a.lname = :lname")
-    , @NamedQuery(name = "Account.findBySex", query = "SELECT a FROM Account a WHERE a.sex = :sex")
-    , @NamedQuery(name = "Account.findByAddress", query = "SELECT a FROM Account a WHERE a.address = :address")
     , @NamedQuery(name = "Account.findByEmail", query = "SELECT a FROM Account a WHERE a.email = :email")
+    , @NamedQuery(name = "Account.findByAddress", query = "SELECT a FROM Account a WHERE a.address = :address")
     , @NamedQuery(name = "Account.findByTelno", query = "SELECT a FROM Account a WHERE a.telno = :telno")
-    , @NamedQuery(name = "Account.findByRegisterdate", query = "SELECT a FROM Account a WHERE a.registerdate = :registerdate")
-    , @NamedQuery(name = "Account.findByPaymentno", query = "SELECT a FROM Account a WHERE a.paymentno = :paymentno")})
+    , @NamedQuery(name = "Account.findByRegisterdate", query = "SELECT a FROM Account a WHERE a.registerdate = :registerdate")})
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,44 +52,27 @@ public class Account implements Serializable {
     private String username;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 40)
+    @Size(min = 1, max = 15)
     @Column(name = "PASSWORD")
     private String password;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 30)
     @Column(name = "FNAME")
     private String fname;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 30)
     @Column(name = "LNAME")
     private String lname;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 3)
-    @Column(name = "SEX")
-    private String sex;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 250)
-    @Column(name = "ADDRESS")
-    private String address;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 30)
     @Column(name = "EMAIL")
     private String email;
-    @Basic(optional = false)
-    @NotNull
+    @Size(max = 500)
+    @Column(name = "ADDRESS")
+    private String address;
     @Column(name = "TELNO")
-    private int telno;
+    private Integer telno;
     @Column(name = "REGISTERDATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date registerdate;
-    @Column(name = "PAYMENTNO")
-    private Integer paymentno;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "username")
     private List<History> historyList;
 
@@ -102,15 +83,9 @@ public class Account implements Serializable {
         this.username = username;
     }
 
-    public Account(String username, String password, String fname, String lname, String sex, String address, String email, int telno) {
+    public Account(String username, String password) {
         this.username = username;
         this.password = password;
-        this.fname = fname;
-        this.lname = lname;
-        this.sex = sex;
-        this.address = address;
-        this.email = email;
-        this.telno = telno;
     }
 
     public String getUsername() {
@@ -145,12 +120,12 @@ public class Account implements Serializable {
         this.lname = lname;
     }
 
-    public String getSex() {
-        return sex;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAddress() {
@@ -161,19 +136,11 @@ public class Account implements Serializable {
         this.address = address;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getTelno() {
+    public Integer getTelno() {
         return telno;
     }
 
-    public void setTelno(int telno) {
+    public void setTelno(Integer telno) {
         this.telno = telno;
     }
 
@@ -183,14 +150,6 @@ public class Account implements Serializable {
 
     public void setRegisterdate(Date registerdate) {
         this.registerdate = registerdate;
-    }
-
-    public Integer getPaymentno() {
-        return paymentno;
-    }
-
-    public void setPaymentno(Integer paymentno) {
-        this.paymentno = paymentno;
     }
 
     @XmlTransient

@@ -19,12 +19,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author INT303
+ * @author Narathip
  */
 @Entity
 @Table(name = "HISTORY")
@@ -32,9 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "History.findAll", query = "SELECT h FROM History h")
     , @NamedQuery(name = "History.findByHistoryid", query = "SELECT h FROM History h WHERE h.historyid = :historyid")
-    , @NamedQuery(name = "History.findByTime", query = "SELECT h FROM History h WHERE h.time = :time")
-    , @NamedQuery(name = "History.findByPaymentmethod", query = "SELECT h FROM History h WHERE h.paymentmethod = :paymentmethod")
-    , @NamedQuery(name = "History.findByPaymentno", query = "SELECT h FROM History h WHERE h.paymentno = :paymentno")})
+    , @NamedQuery(name = "History.findByTime", query = "SELECT h FROM History h WHERE h.time = :time")})
 public class History implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,17 +43,8 @@ public class History implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "TIME")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date time;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 15)
-    @Column(name = "PAYMENTMETHOD")
-    private String paymentmethod;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "PAYMENTNO")
-    private int paymentno;
     @JoinColumn(name = "USERNAME", referencedColumnName = "USERNAME")
     @ManyToOne(optional = false)
     private Account username;
@@ -71,11 +59,9 @@ public class History implements Serializable {
         this.historyid = historyid;
     }
 
-    public History(Integer historyid, Date time, String paymentmethod, int paymentno) {
+    public History(Integer historyid, Date time) {
         this.historyid = historyid;
         this.time = time;
-        this.paymentmethod = paymentmethod;
-        this.paymentno = paymentno;
     }
 
     public Integer getHistoryid() {
@@ -92,22 +78,6 @@ public class History implements Serializable {
 
     public void setTime(Date time) {
         this.time = time;
-    }
-
-    public String getPaymentmethod() {
-        return paymentmethod;
-    }
-
-    public void setPaymentmethod(String paymentmethod) {
-        this.paymentmethod = paymentmethod;
-    }
-
-    public int getPaymentno() {
-        return paymentno;
-    }
-
-    public void setPaymentno(int paymentno) {
-        this.paymentno = paymentno;
     }
 
     public Account getUsername() {
