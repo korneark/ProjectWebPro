@@ -13,5 +13,13 @@
     </head>
     <body>
         <h1>Cart!</h1>
+        <table>
+            <tr>
+                <td>No</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
     </body>
 </html>

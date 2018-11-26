@@ -12,7 +12,15 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>MyAccount!</h1>
+        ${ac.name}
+        
+        <form action="ShowCart">           
         <input type="submit" value="Logout"/>
+        </form>
+        
+        <form action="Logout">           
+        <input type="submit" value="Logout"/>
+        </form>
     </body>
 </html>
