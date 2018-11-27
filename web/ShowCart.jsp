@@ -35,13 +35,13 @@
                 <td>${vs.count}</td>
                 <td>${line.product.productid}</td>
                 <td>${line.product.productname}</td>
-                <td>${line.quantity}</td>
+                <td><a href="RemoveProductInCart?productId=${line.product.productid}">
+                        <input type="button" value="-"/>
+                    </a>${line.quantity}<a href="AddItemInCart?productCode=${line.product.productid}">
+                        <input type="button" value="+"/>
+                    </a></td>
                 <td>${line.product.productprice}</td>
                 <td>${line.totalPrice}</td>
-                <td><a href="RemoveProductInCart?productId=${line.product.productid}">
-                        <input type="button" value="Remove to cart"/>
-                    </a>
-                </td>
             </tr>
         </c:forEach>
         <tr>
@@ -52,6 +52,13 @@
             <td>${cart.totalPrice}</td>
         </tr>
     </table>
+    <a href="Payment">Payment</a>
+    ${QuantityError}
+    <script type="text/javascript">
+        function myfunction(){
+            alert(${QuantityError});
+        }
+    </script>
 </body>
 </html>
 

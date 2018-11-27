@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Narathip
  */
-public class ShowCartServlet extends HttpServlet {
+public class PaymentServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,9 +33,11 @@ public class ShowCartServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if (cart != null) {
-            getServletContext().getRequestDispatcher("/ShowCart.jsp").forward(request, response);
-            session.setAttribute("cart", cart);
+        if(cart.getTotalQuantity()>0){
+            getServletContext().getRequestDispatcher("/Payment.jsp").forward(request, response);
+        }else if(cart.getTotalQuantity()==0){
+            request.setAttribute("QuantityError", "จำนวนสินค้าไม่เพียงพอ");
+            getServletContext().getRequestDispatcher("/ShowCart").forward(request, response);
         }
     }
 

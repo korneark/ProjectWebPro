@@ -5,21 +5,31 @@
  */
 package servlet;
 
+import Model.Jpa.Controller.ProductJpaController;
+import Model.Jpa.Product;
 import Model.ShoppingCart;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.UserTransaction;
 
 /**
  *
  * @author Narathip
  */
-public class ShowCartServlet extends HttpServlet {
-
+public class AddItemInCartServlet extends HttpServlet {
+    @Resource
+    UserTransaction utx;
+    
+    @PersistenceUnit(unitName = "ProjectWebProPU")
+    EntityManagerFactory emf;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,12 +41,17 @@ public class ShowCartServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
+              HttpSession session = request.getSession(true);
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if (cart != null) {
-            getServletContext().getRequestDispatcher("/ShowCart.jsp").forward(request, response);
-            session.setAttribute("cart", cart);
+        if(cart == null) {
+            cart = new ShoppingCart();
+            session.setAttribute("cart",cart);
         }
+        String productCode = request.getParameter("productCode");
+        ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
+        Product  p = productJpaCtrl.findProduct(productCode);        
+        cart.add(p);
+        response.sendRedirect("ShowCart");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
