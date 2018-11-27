@@ -54,11 +54,12 @@
     </table>
     <a href="Payment">Payment</a>
     ${QuantityError}
-    <script type="text/javascript">
+    <script>
         function myfunction(){
-            alert(${QuantityError});
+            window.alert(${QuantityError});
         }
     </script>
+    <jsp:include page="Footer.jsp"/>
 </body>
 </html>
 

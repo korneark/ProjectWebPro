@@ -14,7 +14,7 @@
          body,html {
   margin: 0;
   font: bold 18px sans-serif;
-  background: #B7C11E;
+/*  background: #B7C11E;*/
 }
 a {
   color: #EFF1C2; 

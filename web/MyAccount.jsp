@@ -20,5 +20,6 @@
         <form action="Logout">           
         <input type="submit" value="Logout"/>
         </form>
+        <jsp:include page="Footer.jsp"/>
     </body>
 </html>
