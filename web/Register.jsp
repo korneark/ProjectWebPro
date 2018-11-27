@@ -31,6 +31,7 @@
         </style>
     </head>
     <body>
+        <jsp:include page="Header.jsp"/>
         <div class="login">
   <div class="heading">
     <h2>Register</h2>
@@ -80,5 +81,6 @@
        </form>
  		</div>
  </div>
+        <jsp:include page="Footer.jsp"/>
     </body>
 </html>

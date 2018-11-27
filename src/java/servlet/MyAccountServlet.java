@@ -5,20 +5,29 @@
  */
 package servlet;
 
+import Model.Jpa.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.UserTransaction;
 
 /**
  *
  * @author Windows 10
  */
 public class MyAccountServlet extends HttpServlet {
-
+@Resource
+    UserTransaction utx;
+    
+    @PersistenceUnit(unitName = "ProjectWebProPU")
+    EntityManagerFactory emf;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,8 +40,12 @@ public class MyAccountServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
+        Account ac = (Account) session.getAttribute("ac");
         if(session != null){
+            if(ac!=null){
+                
             getServletContext().getRequestDispatcher("/MyAccount.jsp").forward(request, response);
+            }
         }
         getServletContext().getRequestDispatcher("/LogIn").forward(request, response);
     }

@@ -12,11 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <style>
-            body{
-                background: #00b4da;
-            }
-        </style>
+      
         <jsp:include page="Header.jsp"/>
         <h1>Hello World!</h1>
         

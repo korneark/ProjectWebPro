@@ -48,11 +48,11 @@
                     <tr>
                         <td><img src="Pic/${p.productid}.jpg" width="120"></td>
                         <td>${vs.count}</td>
-                        <td><a href="GetProduct?productId=${p.productid}">${p.productid}</a></td>
+                        <td>${p.productid}</td>
                         <td>${p.productname}</td>                       
                         <td>${p.productdetail}</td>     
                         <td> <a href="AddToCart?productCode=${p.productid}">
-                                <input type="button" value="Add to cart"/>
+                                <button id="bt" type="button" class="btn btn-primary">Add To Cart</button>
                             </a>
                         </td>
                     </tr>

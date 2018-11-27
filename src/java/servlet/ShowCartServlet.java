@@ -5,20 +5,31 @@
  */
 package servlet;
 
+import Model.Jpa.Account;
 import Model.ShoppingCart;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.transaction.UserTransaction;
 
 /**
  *
  * @author Narathip
  */
 public class ShowCartServlet extends HttpServlet {
+
+    @Resource
+    UserTransaction utx;
+
+    @PersistenceUnit(unitName = "ProjectWebProPU")
+    EntityManagerFactory emf;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,12 +43,16 @@ public class ShowCartServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
+        Account ac = (Account) session.getAttribute("ac");
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if (cart != null) {
-            getServletContext().getRequestDispatcher("/ShowCart.jsp").forward(request, response);
-            session.setAttribute("cart", cart);
-        }
-            getServletContext().getRequestDispatcher("/ShowCart.jsp").forward(request, response);
+        if (session != null) {       
+                if (cart != null) {
+                    getServletContext().getRequestDispatcher("/ShowCart.jsp").forward(request, response);
+                    session.setAttribute("cart", cart);
+                }
+                getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+            }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

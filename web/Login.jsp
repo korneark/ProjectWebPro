@@ -31,6 +31,7 @@
         </style>
     </head>
     <body>
+        <jsp:include page="Header.jsp"/>
         <div class="login">
   <div class="heading">
     <h2>Sign in</h2>
@@ -50,6 +51,8 @@
         <a href ="Register">Register</a>
        </form>
  		</div>
- </div>
+ </div><br><br><br><br><br><br><br><br><br><br><br>
+ 
+        <jsp:include page="Footer.jsp"/>
     </body>
 </html>

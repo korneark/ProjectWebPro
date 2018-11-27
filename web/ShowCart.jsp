@@ -14,6 +14,7 @@
     </head>
     <body>
         <jsp:include page="Header.jsp"/>
+    <center>       
         <table id="example" class="table">
             <thead>
             <th>Image</th>
@@ -53,12 +54,14 @@
         </tr>
     </table>
     <a href="Payment">Payment</a>
+    </center>
     ${QuantityError}
     <script>
         function myfunction(){
             window.alert(${QuantityError});
         }
     </script>
+    <br><br><br><br><br><br><br><br><br>
     <jsp:include page="Footer.jsp"/>
 </body>
 </html>
