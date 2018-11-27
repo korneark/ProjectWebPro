@@ -12,7 +12,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>MyAccount!</h1>
+        <jsp:include page="Header.jsp"/>
+    <center><h1>MyAccount!</h1></center> 
         ${ac.fname}
         ${ac.lname}   <br>
         ${ac.email}
