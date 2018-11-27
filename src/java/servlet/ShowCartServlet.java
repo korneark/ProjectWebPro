@@ -34,7 +34,7 @@ public class ShowCartServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
         if (cart != null) {
-            getServletContext().getRequestDispatcher("/ShowCartView.jsp").forward(request, response);
+            getServletContext().getRequestDispatcher("/ShowCart.jsp").forward(request, response);
 
             session.setAttribute("cart", cart);
         }

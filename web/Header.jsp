@@ -78,9 +78,9 @@ section.stretch a:hover:after {
         <section class="stretch">
 <ul>
     <li><a href="Homepage.jsp">Home</a></li>
-    <li><a href="ProductList.jsp">Product</a></li>
-    <li><a href="MyAccount.jsp">Account</a></li>
-    <li><a href="ShowCart.jsp">Cart</a></li>
+    <li><a href="ProductList">Product</a></li>
+    <li><a href="MyAccount">Account</a></li>
+    <li><a href="ShowCart">Cart</a></li>
 </ul>
 </section>
         <script>
