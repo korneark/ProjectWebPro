@@ -33,6 +33,7 @@ public class PaymentServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+        String cardNumber = request.getParameter("cardNumber");
         if(cart.getTotalQuantity()>0){
             getServletContext().getRequestDispatcher("/Payment.jsp").forward(request, response);
         }else if(cart.getTotalQuantity()==0){

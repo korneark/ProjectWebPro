@@ -48,6 +48,10 @@
         <servlet-name>RemoveItemInCartServlet</servlet-name>
         <servlet-class>servlet.RemoveItemInCartServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PayMoneyServlet</servlet-name>
+        <servlet-class>servlet.PayMoneyServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>RemoveItemInCartServlet</servlet-name>
         <url-pattern>/RemoveItemInCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PayMoneyServlet</servlet-name>
+        <url-pattern>/PayMoney</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,11 +5,19 @@
  */
 package servlet;
 
+import Model.Jpa.Account;
+import Model.Jpa.Controller.AccountJpaController;
+import Model.Jpa.Controller.HistoryJpaController;
 import Model.Jpa.Controller.ProductJpaController;
+import Model.Jpa.Controller.exceptions.RollbackFailureException;
+import Model.Jpa.History;
 import Model.Jpa.Product;
 import Model.ShoppingCart;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
@@ -22,14 +30,15 @@ import javax.transaction.UserTransaction;
 
 /**
  *
- * @author Narathip
+ * @author User
  */
-public class AddToCartServlet extends HttpServlet {
+public class PayMoneyServlet extends HttpServlet {
+
     @Resource
     UserTransaction utx;
-    
     @PersistenceUnit(unitName = "ProjectWebProPU")
     EntityManagerFactory emf;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,19 +50,30 @@ public class AddToCartServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-              HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession(false);
+        String creditCard = request.getParameter("creditCard");
+        Account ac = (Account) session.getAttribute("ac");
+        ProductJpaController pCtrl = new ProductJpaController(utx, emf);
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if(cart == null) {
-            cart = new ShoppingCart();
-            session.setAttribute("cart",cart);
-           
+        Product p = (Product) session.getAttribute("p");
+        if (session != null) {
+            if (ac != null && cart != null) {
+                if (creditCard != null) {
+                    try {
+                            HistoryJpaController hisCtrl = new HistoryJpaController(utx, emf);
+                            int hisCount = hisCtrl.getHistoryCount();
+                            History his = new History(hisCount, ac, new Date(), p);
+                            hisCtrl.create(his);
+                            request.setAttribute("ac", ac);
+                            getServletContext().getRequestDispatcher("/Homepage.jsp").forward(request, response);
+                    } catch (RollbackFailureException ex) {
+                        Logger.getLogger(PayMoneyServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (Exception ex) {
+                        Logger.getLogger(PayMoneyServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
         }
-        String productCode = request.getParameter("productCode");
-        ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
-        Product  p = productJpaCtrl.findProduct(productCode);    
-        session.setAttribute("p", p);
-        cart.add(p);
-        response.sendRedirect("ProductList");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
