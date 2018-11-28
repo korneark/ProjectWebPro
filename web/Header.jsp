@@ -10,6 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Header</title>
+    <center>   <img src="Pic/Logo.png" style="width:30%;"></center>
         <link rel="stylesheet" href="CSS/header.css"/>
     </head>
     <body>

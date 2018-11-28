@@ -10,55 +10,95 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="CSS/productList.css"/>
         <title>JSP Page</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
-        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
-        <style>
-            body{
-                background: #00b4da;
-            }
-        </style>
+
+
+
+
+
     </head>
     <body>
         <jsp:include page="Header.jsp"/>
-           <table class="table">
-        <tr>
-            <td>
-                <c:if test="${cart != null}">
-                    <a href="ShowCart.jsp">Your Cart: (${cart.totalQuantity})</a>
-                </c:if>
-            </td>
-        </tr>
-    </table>
-        <div class="table">
+        <table class="table">
+            <tr>
+                <td>
+                    <c:if test="${cart != null}">
+                        <a href="ShowCart.jsp">Your Cart: (${cart.totalQuantity})</a>
+                    </c:if>
+                </td>
+            </tr>
+        </table>
+        <c:forEach items="${product}" var="p" varStatus="vs">            
+            <div id="container">	
 
-            <table id="example" class="table">
-                <thead>
-                <th>Image</th>
-                <th>No</th>
-                <th>Product Id</th>
-                <th>Product Name</th>  
-                <th>Product Detail</th>
-                <th>Add</th>
-                </thead>
-                <c:forEach items="${product}" var="p" varStatus="vs">
-                    <tr>
-                        <td><img src="Pic/${p.productid}.jpg" width="120"></td>
-                        <td>${vs.count}</td>
-                        <td>${p.productid}</td>
-                        <td>${p.productname}</td>                       
-                        <td>${p.productdetail}</td>     
-                        <td> <a href="AddToCart?productCode=${p.productid}">
-                                <button id="bt" type="button" class="btn btn-primary">Add To Cart</button>
-                            </a>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
-           <jsp:include page="Footer.jsp"/>
-</body>
+                <!-- Start	Product details -->
+                <div class="product-details">
+
+                    <!-- 	Product Name -->
+                    <h1>${p.productname}</h1>
+                    <!-- 		<span class="hint new">New</span> -->
+                    <!-- 		<span class="hint free-shipping">Free Shipping</span> -->
+                    <!-- 		the Product rating -->
+                    <span class="hint-star star">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                    </span>
+
+
+                    <!-- The most important information about the product -->
+                    <p class="information">
+                        มาแรง!<br>
+                        ขายดี!<br>
+                        ส่งฟรี!<br>
+
+                    </p>
+
+
+
+                    <!-- 		Control -->
+                    <div class="control">
+
+                        <!-- Start Button buying -->
+                        <button class="btn">
+                            <!-- 		the Price -->
+                            <span class="price">${p.productprice}</span>
+                            <!-- 		shopping cart icon-->
+                            <span class="shopping-cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></span>
+                            <!-- 		Buy Now / ADD to Cart-->
+                            <span class="buy"><a href="AddToCart?productCode=${p.productid}">Add To Cart</a></span>
+                        </button>
+                        <!-- End Button buying -->
+
+                    </div>
+
+                </div>
+
+                <!-- 	End	Product details   -->
+                <!-- 	Start product image & Information -->
+
+                <div class="product-image">
+
+                    <img src="Pic/${p.productid}.jpg" alt="Omar Dsoky">
+
+                    <!-- 	product Information-->
+                    <div class="info">
+                        <h2>The Description</h2>
+                        ${p.productdetail}
+                    </div>
+                </div>
+                <!--  End product image  -->
+
+
+            </div>
+                    
+        </c:forEach>
+
+
+
+        <jsp:include page="Footer.jsp"/>
+    </body>
 </html>
