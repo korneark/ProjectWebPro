@@ -29,6 +29,10 @@
                 </td>
             </tr>
         </table>
+        <form action="Search">
+                <input type = search name="search" id="search">
+                <input type="submit" value="search">
+            </form>
         <c:forEach items="${product}" var="p" varStatus="vs">            
             <div id="container">	
 
