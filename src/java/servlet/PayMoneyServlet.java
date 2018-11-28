@@ -66,6 +66,7 @@ public class PayMoneyServlet extends HttpServlet {
                             hisCtrl.create(his);
                             request.setAttribute("ac", ac);
                             getServletContext().getRequestDispatcher("/Homepage.jsp").forward(request, response);
+                            session.removeAttribute("cart");
                     } catch (RollbackFailureException ex) {
                         Logger.getLogger(PayMoneyServlet.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (Exception ex) {
