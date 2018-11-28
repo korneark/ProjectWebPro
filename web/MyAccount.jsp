@@ -17,7 +17,7 @@
         ${ac.fname}
         ${ac.lname}   <br>
         ${ac.email}
-        <a href="Payment">Payment</a><br>
+        <br>
         <a href="Logout">Logout</a>
         <jsp:include page="Footer.jsp"/>
     </body>
