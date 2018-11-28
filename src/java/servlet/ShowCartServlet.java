@@ -45,12 +45,18 @@ public class ShowCartServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         Account ac = (Account) session.getAttribute("ac");
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
-        if (session != null) {       
+        if (session != null) {   
+            if(ac!=null){
+                
                 if (cart != null) {
                     getServletContext().getRequestDispatcher("/ShowCart.jsp").forward(request, response);
                     session.setAttribute("cart", cart);
                 }
+            }else{
+                
                 getServletContext().getRequestDispatcher("/Login.jsp").forward(request, response);
+            }
+                    getServletContext().getRequestDispatcher("/ShowCart.jsp").forward(request, response);
             }
         
     }

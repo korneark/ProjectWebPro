@@ -72,11 +72,7 @@
         <input type="number" class="form-control" placeholder="TelNo" name="telNo">
           </div>
         <br>
-                <div class="input-group input-group-lg">
-        <span class="input-group-addon"><i class=""></i></span>
-        <input type="number" class="form-control" placeholder="Payment No" name="creditCard">
-          </div>
-        <br>
+                
         <button type="submit" class="float">Register</button>
        </form>
  		</div>
