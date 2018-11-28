@@ -24,6 +24,7 @@
             <th>Quantity</th>
             <th>Price</th>
             <th>Total Price</th>
+            <th>Remove</th>
         </thead>
 
         <c:set var="items" value="${sessionScope.cart.lineItems}"/>
@@ -43,6 +44,8 @@
                     </a></td>
                 <td>${line.product.productprice}</td>
                 <td>${line.totalPrice}</td>
+                <td><a href="RemoveItemInCart?productId=${line.product.productid}">
+                        <input type="button" value="Remove"/></td>
             </tr>
         </c:forEach>
         <tr>

@@ -34,11 +34,19 @@ public class ShoppingCart implements Serializable{
         }
     }
     
-    public void remove(Product p){
+    public void removeQuantity(Product p){
         LineItem line = cart.get(p.getProductid());
         if(line.getQuantity()>=1){
               line.setQuantity(line.getQuantity() - 1);
         }
+    }
+    
+    public void remove(Product p) {
+        this.remove(p.getProductid());
+    }
+    
+    public void remove(String productCode) {
+        cart.remove(productCode);
     }
     
     

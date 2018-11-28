@@ -44,6 +44,10 @@
         <servlet-name>PaymentServlet</servlet-name>
         <servlet-class>servlet.PaymentServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RemoveItemInCartServlet</servlet-name>
+        <servlet-class>servlet.RemoveItemInCartServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>PaymentServlet</servlet-name>
         <url-pattern>/Payment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveItemInCartServlet</servlet-name>
+        <url-pattern>/RemoveItemInCart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

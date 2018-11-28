@@ -22,9 +22,9 @@ import javax.transaction.UserTransaction;
 
 /**
  *
- * @author Windows 10
+ * @author User
  */
-public class RemoveProductInCartServlet extends HttpServlet {
+public class RemoveItemInCartServlet extends HttpServlet {
 @Resource
     UserTransaction utx;
     
@@ -50,7 +50,7 @@ public class RemoveProductInCartServlet extends HttpServlet {
         String productCode = request.getParameter("productId");
         ProductJpaController productJpaCtrl = new ProductJpaController(utx, emf);
         Product product = productJpaCtrl.findProduct(productCode);
-        cart.removeQuantity(product);
+        cart.remove(product);
         response.sendRedirect("ShowCart");
     }
 
