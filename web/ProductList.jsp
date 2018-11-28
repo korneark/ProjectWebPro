@@ -11,6 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="CSS/productList.css"/>
+        <link rel="stylesheet" href="CSS/search.css"/>
         <title>JSP Page</title>
 
 
@@ -29,10 +30,16 @@
                 </td>
             </tr>
         </table>
+            <div class="wrap">
+                <div class="search">
         <form action="Search">
-                <input type = search name="search" id="search">
-                <input type="submit" value="search">
-            </form>
+                    <input type = "text" name="search" id="search" class="searchTerm" placeholder="What are you looking for?">
+                    <button type="submit" class="searchButton">
+                        <i class="fa fa-search"></i>
+                    </button>
+        </form>
+                </div>
+            </div>
         <c:forEach items="${product}" var="p" varStatus="vs">            
             <div id="container">	
 
@@ -98,7 +105,7 @@
 
 
             </div>
-                    
+
         </c:forEach>
 
 
