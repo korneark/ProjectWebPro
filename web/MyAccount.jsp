@@ -13,12 +13,13 @@
     </head>
     <body>
         <jsp:include page="Header.jsp"/>
-    <center><h1>MyAccount!</h1></center> 
-        ${ac.fname}
+    <center><h1>MyAccount!</h1>
+        name : ${ac.fname}
         ${ac.lname}   <br>
-        ${ac.email}
-        <br>
-        <a href="Logout">Logout</a>
+        email : ${ac.email}<br>
+        address : ${ac.address}<br>
+        telno : ${ac.telno}<br>
+        <a href="Logout">Logout</a></center> 
         <jsp:include page="Footer.jsp"/>
     </body>
 </html>
