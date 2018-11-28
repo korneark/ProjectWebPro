@@ -48,27 +48,27 @@
         </div>
         <br>
         <div class="input-group input-group-lg">
-        <span class="input-group-addon"><i class="fa "></i></span>
-        <input type="text" class="form-control" placeholder="fname" name="fName">
+        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <input type="text" class="form-control" placeholder="Name" name="fName">
           </div>
         <br>
         <div class="input-group input-group-lg">
-        <span class="input-group-addon"><i class=""></i></span>
-        <input type="text" class="form-control" placeholder="lname" name="lName">
+        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <input type="text" class="form-control" placeholder="Surname" name="lName">
           </div>
         <br>
         <div class="input-group input-group-lg">
-        <span class="input-group-addon"><i class=""></i></span>
+        <span class="input-group-addon"><i class="fa fa-star"></i></span>
         <input type="email" class="form-control" placeholder="Email" name="email">
           </div>
         <br>
         <div class="input-group input-group-lg">
-        <span class="input-group-addon"><i class=""></i></span>
+        <span class="input-group-addon"><i class="fa fa-star"></i></span>
         <input type="text" class="form-control" placeholder="Address" name="address">
           </div>
         <br>
                 <div class="input-group input-group-lg">
-        <span class="input-group-addon"><i class=""></i></span>
+        <span class="input-group-addon"><i class="fa fa-star"></i></span>
         <input type="number" class="form-control" placeholder="TelNo" name="telNo">
           </div>
         <br>

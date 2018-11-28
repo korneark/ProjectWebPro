@@ -10,6 +10,10 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Header</title>
+        <div class="dots">
+  <div class="fade-top">
+  </div>
+</div>
     <center>   <img src="Pic/Logo.png" style="width:30%;"></center>
         <link rel="stylesheet" href="CSS/header.css"/>
     </head>
@@ -23,8 +27,6 @@
     <li><a href="ShowCart">Cart</a></li>
 </ul>
 </section>
-        <script>
-            
-        </script>
+        
     </body>
 </html>
