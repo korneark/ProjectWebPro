@@ -26,20 +26,21 @@
 
 <!-- main content --> 
 
-<form class="checkout">
+<form class="checkout" action="PayMoney">
     <div class="checkout-header">
       <h1 class="checkout-title">
         Checkout
         
       </h1>
     </div>
+    
     <p>
       <input type="text" class="checkout-input checkout-name" placeholder="Your name" autofocus>
       <input type="text" class="checkout-input checkout-exp" placeholder="MM">
       <input type="text" class="checkout-input checkout-exp" placeholder="YY">
     </p>
     <p>
-      <input type="text" class="checkout-input checkout-card" placeholder="4111 1111 1111 1111">
+        <input type="text" class="checkout-input checkout-card" placeholder="4111 1111 1111 1111" name="creditCard">
       <input type="text" class="checkout-input checkout-cvc" placeholder="CVC">
     </p>
     <p>

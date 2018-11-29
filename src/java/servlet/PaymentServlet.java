@@ -35,7 +35,6 @@ public class PaymentServlet extends HttpServlet {
         ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
         String cardNumber = request.getParameter("cardNumber");
         if (cart!=null) {
-            
             if (cart.getTotalQuantity() > 0) {
                 getServletContext().getRequestDispatcher("/Payment.jsp").forward(request, response);
             } else if (cart.getTotalQuantity() == 0) {
